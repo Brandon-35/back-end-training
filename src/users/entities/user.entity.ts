@@ -21,7 +21,7 @@ export class User {
     salary: string;
 
     @Column({ length: 100 })
-    Reason: string;
+    reason: string;
 
     @Column({ length: 100 })
     birthday: string;
@@ -32,6 +32,9 @@ export class User {
     @Column({ length: 100 })
     position: string;
 
+    @Column({ length: 100 })
+    password: string;
+
     @Column()
-    status: boolean;
+    status: number;
 } 
