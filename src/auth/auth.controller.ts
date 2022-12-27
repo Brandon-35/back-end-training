@@ -7,10 +7,6 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Post('/signup')
   registration(@Body() registrationUserDto: RegistrationUserDto) {
-    
-    const password =  passwordHash.generate(registrationUserDto?.password);
-    console.log(password);
-    
-
+    return this.authService.create(registrationUserDto);
   }
 }

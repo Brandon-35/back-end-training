@@ -7,8 +7,8 @@ export class AuthService {
     constructor(
         @Inject('AUTH_RESPOSITORY')
         private authRespository: Repository<User>,
-      ) { }
+    ) { }
     create(registrationUserDto: RegistrationUserDto) {
-        return registrationUserDto;
+        console.log(registrationUserDto)
     }
 }
