@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
-@Entity()
-export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+import { BaseEntity, BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import * as bcrypt from 'bcrypt';
+@Entity({name : "users"})
+export class Users  extends BaseEntity{
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column({ length: 100 })
     username: string;
@@ -37,4 +37,14 @@ export class User {
 
     @Column()
     status: number;
+
+    @BeforeInsert()
+    async hashPassword() {
+        const saltOrRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltOrRounds);
+    }
+
+    async validatePassword(password: string): Promise<boolean> {
+        return bcrypt.compare(password, this.password);
+    }
 } 
