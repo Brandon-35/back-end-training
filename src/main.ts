@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import * as expressListRoutes from 'express-list-routes';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe)
@@ -12,10 +13,12 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  const server = app.getHttpServer();
+  const router = server._events.request._router;
   const PORT = 3000
   await app.listen(PORT, () => {
     console.log("App run port:" + PORT);
-
+    console.log(expressListRoutes({}, 'API:', router));
   });
 
 
