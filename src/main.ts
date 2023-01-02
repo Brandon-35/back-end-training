@@ -15,7 +15,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   const server = app.getHttpServer();
   const router = server._events.request._router;
-  const PORT = 3000
+  const PORT = process.env.PORT
   await app.listen(PORT, () => {
     console.log("App run port:" + PORT);
     console.log(expressListRoutes({}, 'API:', router));
