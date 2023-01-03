@@ -23,9 +23,9 @@ export class AuthService {
     if (!user) {
         throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);    
     }
-    
+
     // compare passwords    
-    const areEqual = await comparePasswords(user.password, password);
+    const areEqual = await comparePasswords(password,user.password);
 
     if (!areEqual) {
         throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);    
