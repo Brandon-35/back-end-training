@@ -13,8 +13,20 @@ export class UsersService {
   ) { }
   async create(createUserDto: CreateUserDto) {
     const user = this.userRespository.create(createUserDto);
-    await user.save();
-    return user;
+    try {
+      await user.save();
+      return {
+        success: true,
+        message: 'Successfully updated status',
+        data : user
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: 'Failed create user',
+      };
+    }
+    
   }
 
   findAll() {
