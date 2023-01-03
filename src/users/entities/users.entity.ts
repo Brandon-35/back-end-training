@@ -43,8 +43,4 @@ export class Users  extends BaseEntity{
         const saltOrRounds = 10;
         this.password = await bcrypt.hash(this.password, saltOrRounds);
     }
-
-    async validatePassword(password: string): Promise<boolean> {
-        return bcrypt.compare(password, this.password);
-    }
 } 
