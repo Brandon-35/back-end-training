@@ -6,10 +6,12 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { ApiOkResponse } from '@nestjs/swagger';
+
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
-
+  
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
